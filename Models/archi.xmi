@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<archimate:ArchimateDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:archimate="http://www.example.org/archimate">
+  <activestructureelement xsi:type="archimate:Stakeholder" name="Estudante" target="//@motivationelement.0"/>
+  <motivationelement xsi:type="archimate:Goal" name="Apresentar Paper">
+    <children xsi:type="archimate:Goal" name="Viagem Reservada" refinementType="OR">
+      <children xsi:type="archimate:Goal" name="Reservada pela Agencia"/>
+      <children xsi:type="archimate:Goal" name="Reservada por conta própria"/>
+    </children>
+    <children xsi:type="archimate:Goal" name="Autorizacao Obtida">
+      <children xsi:type="archimate:Goal" name="Requisicao Submetida"/>
+      <children xsi:type="archimate:Goal" name="Requisicao Aprovada"/>
+    </children>
+  </motivationelement>
+</archimate:ArchimateDiagram>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iStar:IstarDiagram
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:iStar="http://www.example.org/iStar"
+    xsi:schemaLocation="http://www.example.org/iStar ../Metamodels/iStar.ecore">
+  <actors xsi:type="iStar:Role"
+      name="Estudante">
+    <contains
+        xsi:type="iStar:Goal"
+        name="Apresentar Paper">
+      <children
+          xsi:type="iStar:Goal"
+          name="Viagem Reservada"
+          refinementType="OR"
+          orRefined="//@actors.0/@contains.0/@children.0/@children.0 //@actors.0/@contains.0/@children.0/@children.1">
+        <children
+            xsi:type="iStar:Goal"
+            name="Reservada pela Agencia"/>
+        <children
+            xsi:type="iStar:Goal"
+            name="Reservada por conta própria"/>
+      </children>
+      <children
+          xsi:type="iStar:Goal"
+          name="Autorizacao Obtida"
+          andRefined="//@actors.0/@contains.0/@children.1/@children.0 //@actors.0/@contains.0/@children.1/@children.1">
+        <children
+            xsi:type="iStar:Goal"
+            name="Requisicao Submetida"/>
+        <children
+            xsi:type="iStar:Goal"
+            name="Requisicao Aprovada"/>
+      </children>
+    </contains>
+  </actors>
+</iStar:IstarDiagram>
