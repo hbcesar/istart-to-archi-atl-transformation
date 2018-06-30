@@ -6,6 +6,10 @@
         upperBound="-1" eType="#//ActiveStructureElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="motivationelement" upperBound="-1"
         eType="#//MotivationElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bussinesselement" upperBound="-1"
+        eType="#//BusinessElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="strategyelement" upperBound="-1"
+        eType="#//StrategyElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActiveStructureElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="influences" upperBound="-1"
@@ -27,6 +31,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//MotivationElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="refinementType" eType="#//refinement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="relationType" lowerBound="1"
+        eType="#//relationType" defaultValueLiteral="association"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Meaning" eSuperTypes="#//MotivationElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="stakeholder" upperBound="-1"
@@ -72,8 +78,39 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="goal" upperBound="-1" eType="#//Goal"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Constraint" eSuperTypes="#//Requirement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StrategyElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="refinementType" eType="#//refinement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//StrategyElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="relationType" lowerBound="1"
+        eType="#//relationType" defaultValueLiteral="association"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="influences" upperBound="-1"
+        eType="#//MotivationElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Resource" eSuperTypes="#//StrategyElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BusinessElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="refinementType" eType="#//refinement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//BusinessElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="relationType" lowerBound="1"
+        eType="#//relationType" defaultValueLiteral="association"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="realizes" upperBound="-1"
+        eType="#//MotivationElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="influences" upperBound="-1"
+        eType="#//MotivationElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BusinessProcess" eSuperTypes="#//BusinessElement"/>
   <eClassifiers xsi:type="ecore:EEnum" name="refinement">
     <eLiterals name="AND"/>
     <eLiterals name="OR"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="relationType">
+    <eLiterals name="association"/>
+    <eLiterals name="realization" value="1" literal="realization"/>
+    <eLiterals name="trigger" value="2"/>
+    <eLiterals name="composition" value="3"/>
+    <eLiterals name="influences" value="4"/>
   </eClassifiers>
 </ecore:EPackage>

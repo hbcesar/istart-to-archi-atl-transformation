@@ -19,7 +19,15 @@
         eType="#//Quality"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="refinementType" eType="#//Refinement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
-        eType="#//IntentionalElement" containment="true"/>
+        eType="#//IntentionalElement" containment="true" eOpposite="#//IntentionalElement/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependency" upperBound="-1"
+        eType="#//IntentionalElement" eOpposite="#//IntentionalElement/dependeer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependeer" upperBound="-1"
+        eType="#//IntentionalElement" eOpposite="#//IntentionalElement/dependency"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="helps" upperBound="-1"
+        eType="#//IntentionalElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//IntentionalElement"
+        eOpposite="#//IntentionalElement/children"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Agent" eSuperTypes="#//Actor">
     <eStructuralFeatures xsi:type="ecore:EReference" name="plays" upperBound="-1"
@@ -34,14 +42,17 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Resource" eSuperTypes="#//IntentionalElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="neededBy" upperBound="-1"
-        eType="#//Task"/>
+        eType="#//Task" eOpposite="#//Task/resources"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Quality" eSuperTypes="#//IntentionalElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="qualifies" upperBound="-1"
         eType="#//IntentionalElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Goal" eSuperTypes="#//GoalTaskElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Task" eSuperTypes="#//GoalTaskElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Task" eSuperTypes="#//GoalTaskElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resources" upperBound="-1"
+        eType="#//Resource" eOpposite="#//Resource/neededBy"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Refinement">
     <eLiterals name="AND"/>
     <eLiterals name="OR" value="1"/>

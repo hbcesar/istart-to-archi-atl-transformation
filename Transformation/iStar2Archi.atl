@@ -20,6 +20,7 @@ rule iStar2Archi {
 		archi : Archi!ArchimateDiagram (
 			activestructureelement <- istar.actors,
 			motivationelement <- istar.getElements()
+			-- aqui teria que pegar todos os tasks e gravar juntxs listadinhos
 		)
 }
 
@@ -40,33 +41,56 @@ rule Goal2Goal {
 		archi : Archi!Goal (
 			name <- istar.name,
 			refinementType <- istar.refinementType,
-			children <- istar.children
+			children <- istar.children,
+			relationType <- 'association',
+			influences <- istar.helps
 		)
 }
 
-rule Resource2Resource {
+rule Task2BusinessProcess { 
+	from
+		istar : iStar!Task
+	to
+		archi : Archi!BusinessProcess (
+			name <- istar.name,
+			children <- istar.children,
+			influences <- istar.helps,
+			realizes <- if istar.refImmediateComposite().oclIsKindOf(iStar!Goal)
+							then istar.parent
+							else OclUndefined
+							endif,
+			relationType <- if istar.children.first().oclIsTypeOf(iStar!Task) 
+								then 'composition' 
+								else 'association' 
+								endif,
+			refinementType <- istar.refinementType
+		)
+}
+
+rule Resource2Resources {
 	from
 		istar : iStar!Resource
 	to
 		archi : Archi!Resource (
-			name <- istar.name
+			name <- istar.name,
+			influences <- istar.helps,
+			realizes <- if istar.refImmediateComposite().oclIsKindOf(iStar!Quality)
+							then istar.parent
+							else OclUndefined
+							endif
 		)
 }
 
-rule Quality2Value {
+rule Quality2Principle {
 	from
 		istar : iStar!Quality
 	to
-		archi : Archi!Value (
-			name <- istar.name
+		archi : Archi!Principle (
+			name <- istar.name,
+			influences <- istar.helps
 		)
 }
 
-rule Task2BussinessProcess { 
-	from
-		istar : iStar!Task
-	to
-		archi : Archi!BussinessProcess (
-			name <- istar.name
-		)
-}
+-- agora só falta ver se isso de um business process ficar dentro do goal é valido 
+-- dar uma olhada em como funciona no metamodelo do archi
+-- acho que o ideal seria tudo fora mesmo (mas ai nao sei como fazer)
