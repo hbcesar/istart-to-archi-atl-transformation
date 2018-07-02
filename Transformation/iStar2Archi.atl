@@ -19,7 +19,8 @@ rule iStar2Archi {
 	to
 		archi : Archi!ArchimateDiagram (
 			activestructureelement <- istar.actors,
-			motivationelement <- istar.getElements()
+			motivationelement <- istar.getElements(),
+			strategyelement <- iStar!Task.allInstances()
 			-- aqui teria que pegar todos os tasks e gravar juntxs listadinhos
 		)
 }
@@ -41,7 +42,7 @@ rule Goal2Goal {
 		archi : Archi!Goal (
 			name <- istar.name,
 			refinementType <- istar.refinementType,
-			children <- istar.children,
+			children <- istar.children->select(el | not el.oclIsKindOf(iStar!Task)),
 			relationType <- 'association',
 			influences <- istar.helps
 		)
@@ -90,7 +91,3 @@ rule Quality2Principle {
 			influences <- istar.helps
 		)
 }
-
--- agora só falta ver se isso de um business process ficar dentro do goal é valido 
--- dar uma olhada em como funciona no metamodelo do archi
--- acho que o ideal seria tudo fora mesmo (mas ai nao sei como fazer)
