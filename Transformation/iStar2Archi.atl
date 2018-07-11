@@ -21,7 +21,6 @@ rule iStar2Archi {
 			activestructureelement <- istar.actors,
 			motivationelement <- istar.getElements(),
 			strategyelement <- iStar!Task.allInstances()
-			-- aqui teria que pegar todos os tasks e gravar juntxs listadinhos
 		)
 }
 
