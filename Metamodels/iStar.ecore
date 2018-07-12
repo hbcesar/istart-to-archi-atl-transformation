@@ -20,14 +20,17 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="refinementType" eType="#//Refinement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//IntentionalElement" containment="true" eOpposite="#//IntentionalElement/parent"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dependency" upperBound="-1"
-        eType="#//IntentionalElement" eOpposite="#//IntentionalElement/dependeer"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dependeer" upperBound="-1"
-        eType="#//IntentionalElement" eOpposite="#//IntentionalElement/dependency"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependency" eType="#//IntentionalElement"
+        eOpposite="#//IntentionalElement/depender"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependee" eType="#//IntentionalElement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="helps" upperBound="-1"
         eType="#//IntentionalElement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//IntentionalElement"
         eOpposite="#//IntentionalElement/children"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hurts" upperBound="-1"
+        eType="#//IntentionalElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="depender" eType="#//IntentionalElement"
+        eOpposite="#//IntentionalElement/dependency"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Agent" eSuperTypes="#//Actor">
     <eStructuralFeatures xsi:type="ecore:EReference" name="plays" upperBound="-1"

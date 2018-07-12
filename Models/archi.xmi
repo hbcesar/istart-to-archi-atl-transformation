@@ -1,42 +1,23 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<archimate:ArchimateDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:archimate="http://www.example.org/archimate">
-  <activestructureelement xsi:type="archimate:Stakeholder" name="Estudante" target="//@motivationelement.0"/>
-  <activestructureelement xsi:type="archimate:Stakeholder" name="PPG" target="//@motivationelement.1 //@strategyelement.3"/>
-  <motivationelement xsi:type="archimate:Goal" name="Apresentar Paper">
-    <children xsi:type="archimate:Goal" name="Viagem Reservada" refinementType="OR">
-      <children xsi:type="archimate:Goal" name="Reservada pela Agencia">
-        <children xsi:type="archimate:Principle" name="Comodidade"/>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:archimate="http://www.example.org/archimate">
+  <archimate:ArchimateDiagram>
+    <activestructureelement xsi:type="archimate:Stakeholder" name="Meeting Scheduler" target="/0/@strategyelement.0"/>
+    <activestructureelement xsi:type="archimate:Stakeholder" name="Meeting Initiator" target="/0/@motivationelement.0"/>
+    <motivationelement xsi:type="archimate:Goal" name="Ter Reunião Organizada">
+      <children xsi:type="archimate:Principle" name="Organizar Rapidamente"/>
+      <children xsi:type="archimate:Principle" name="Organizar com Pouco Esforço"/>
+    </motivationelement>
+    <strategyelement xsi:type="archimate:BusinessProcess" name="Agendar Reunião" relationType="composition">
+      <children xsi:type="archimate:BusinessProcess" name="Obter Calendários">
+        <children xsi:type="archimate:Resource" name="Calendários de Participantes"/>
       </children>
-      <children xsi:type="archimate:Goal" influences="//@motivationelement.0/@children.0/@children.1/@children.0" name="Reservada por conta própria">
-        <children xsi:type="archimate:Principle" name="Rapidez na Reserva"/>
-        <children xsi:type="archimate:Principle" name="Economia"/>
-      </children>
-    </children>
-    <children xsi:type="archimate:Goal" name="Autorizacao Obtida">
-      <children xsi:type="archimate:Goal" name="Requisicao Submetida">
-        <children xsi:type="archimate:Principle" name="Minimizar erros"/>
-      </children>
-      <children xsi:type="archimate:Goal" name="Requisicao Aprovada"/>
-    </children>
-  </motivationelement>
-  <motivationelement xsi:type="archimate:Goal" name="Publicar Papers"/>
-  <strategyelement xsi:type="archimate:BusinessProcess" name="Reservar pela Agencia" realizes="//@motivationelement.0/@children.0/@children.0" influences="//@motivationelement.0/@children.0/@children.0/@children.0"/>
-  <strategyelement xsi:type="archimate:BusinessProcess" name="Reservar por Conta Propria" realizes="//@motivationelement.0/@children.0/@children.1">
-    <children xsi:type="archimate:Resource" name="Portais de Reserva Online" influences="//@motivationelement.0/@children.0/@children.1/@children.0"/>
-    <children xsi:type="archimate:Resource" name="Comparador de Preco Online"/>
-    <children xsi:type="archimate:BusinessProcess" name="Reservar Hospedagem"/>
-    <children xsi:type="archimate:BusinessProcess" name="Reservar Passagens"/>
-  </strategyelement>
-  <strategyelement xsi:type="archimate:BusinessProcess" name="Submeter Requisição" relationType="composition" realizes="//@motivationelement.0/@children.1/@children.0">
-    <children xsi:type="archimate:BusinessProcess" name="Preparar Informações" refinementType="OR" relationType="composition">
-      <children xsi:type="archimate:BusinessProcess" name="Submeter Formulario em Papel"/>
-      <children xsi:type="archimate:BusinessProcess" name="Submeter Formulario Online" influences="//@motivationelement.0/@children.1/@children.0/@children.0">
-        <children xsi:type="archimate:Resource" name="Sistema de Submissao Online" influences="//@motivationelement.0/@children.1/@children.0/@children.0"/>
-      </children>
-    </children>
-  </strategyelement>
-  <strategyelement xsi:type="archimate:BusinessProcess" name="Aprovar Requisição" relationType="composition">
-    <children xsi:type="archimate:BusinessProcess" name="Validar Requisição"/>
-    <children xsi:type="archimate:BusinessProcess" name="Notificar Estudante"/>
-  </strategyelement>
-</archimate:ArchimateDiagram>
+      <children xsi:type="archimate:BusinessProcess" name="Encontrar Horário Livre"/>
+      <children xsi:type="archimate:BusinessProcess" name="Obter Confirmações"/>
+    </strategyelement>
+    <strategyelement xsi:type="archimate:BusinessProcess" name="Organizar Reunião" refinementType="OR" relationType="composition" realizes="/0/@motivationelement.0">
+      <children xsi:type="archimate:BusinessProcess" name="Organizar Manualmente" negativeInfluence="/0/@motivationelement.0/@children.0 /0/@motivationelement.0/@children.1"/>
+      <children xsi:type="archimate:BusinessProcess" name="Organizar Pelo Agendador" influences="/0/@motivationelement.0/@children.0 /0/@motivationelement.0/@children.1" triggers="/0/@strategyelement.0"/>
+    </strategyelement>
+  </archimate:ArchimateDiagram>
+  <archimate:BusinessProcess name="Reunião a ser agendada"/>
+</xmi:XMI>

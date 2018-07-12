@@ -20,7 +20,7 @@ rule iStar2Archi {
 		archi : Archi!ArchimateDiagram (
 			activestructureelement <- istar.actors,
 			motivationelement <- istar.getElements(),
-			strategyelement <- iStar!Task.allInstances()
+			strategyelement <- iStar!Task.allInstances()->select(el | el.depender.oclIsUndefined())
 		)
 }
 
@@ -43,8 +43,10 @@ rule Goal2Goal {
 			refinementType <- istar.refinementType,
 			children <- istar.children->select(el | not el.oclIsKindOf(iStar!Task)),
 			relationType <- 'association',
-			influences <- istar.helps
+			influences <- istar.helps,
+			negativeInfluence <- istar.hurts
 		)
+		
 }
 
 rule Task2BusinessProcess { 
@@ -55,6 +57,7 @@ rule Task2BusinessProcess {
 			name <- istar.name,
 			children <- istar.children,
 			influences <- istar.helps,
+			negativeInfluence <- istar.hurts,
 			realizes <- if istar.refImmediateComposite().oclIsKindOf(iStar!Goal)
 							then istar.parent
 							else OclUndefined
@@ -63,7 +66,11 @@ rule Task2BusinessProcess {
 								then 'composition' 
 								else 'association' 
 								endif,
-			refinementType <- istar.refinementType
+			refinementType <- istar.refinementType,
+			triggers <- if not istar.dependency.oclIsUndefined()
+								then istar.dependency.dependee
+								else OclUndefined
+								endif
 		)
 }
 
@@ -73,7 +80,6 @@ rule Resource2Resources {
 	to
 		archi : Archi!Resource (
 			name <- istar.name,
-			influences <- istar.helps,
 			realizes <- if istar.refImmediateComposite().oclIsKindOf(iStar!Quality)
 							then istar.parent
 							else OclUndefined
@@ -87,6 +93,7 @@ rule Quality2Principle {
 	to
 		archi : Archi!Principle (
 			name <- istar.name,
-			influences <- istar.helps
+			influences <- istar.helps,
+			negativeInfluence <- istar.hurts
 		)
 }

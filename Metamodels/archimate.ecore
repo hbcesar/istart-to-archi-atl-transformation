@@ -33,6 +33,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="refinementType" eType="#//refinement"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="relationType" lowerBound="1"
         eType="#//relationType" defaultValueLiteral="association"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="negativeInfluence" upperBound="-1"
+        eType="#//MotivationElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Meaning" eSuperTypes="#//MotivationElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="stakeholder" upperBound="-1"
@@ -99,6 +101,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="realizes" upperBound="-1"
         eType="#//MotivationElement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="influences" upperBound="-1"
+        eType="#//MotivationElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="triggers" eType="#//BusinessElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="negativeInfluence" upperBound="-1"
         eType="#//MotivationElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BusinessProcess" eSuperTypes="#//BusinessElement"/>
